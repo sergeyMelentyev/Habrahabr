@@ -2,4 +2,8 @@
     <string name="app_name">Habrahabr</string>
     <string name="cell_view_title">Title</string>
     <string name="cell_view_category">Category</string>
+    <string name="image_content">Logo Image</string>
+    <string name="feed_view_description">Description</string>
+    <string name="feed_view_show_btn">Читать дальше</string>
+    <string name="feed_view_pub_date">Publication Date</string>
 </resources>

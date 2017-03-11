@@ -1,31 +1,44 @@
 package com.example.melentyev.sergey.habrahabr.model;
 
+import android.graphics.Bitmap;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class Feed {
-    private String mTitle;
-    private String mLinkToFullPost;
-    private String mDescription;
-    private String mCategory;
-    private String mPubDate;
-    private String mImageUrl;
-    private String mAuthor;
-    private UUID mUUID;
+    private String mTitle;  // cellView
+    private String mLinkToFullPost; // feedView
+    private String mDescription;    // feedView
+    private String mCategory;   // cellView
+    private Date mPubDate;
+    private String mImageUrl;   // cellView
+    private Bitmap mImage;  // cellView
+    private UUID mUUID; // data
 
     public Feed(String title, String pubDate, String description, String category,
-                String author, String imageUrl, String linkToFullPost) {
+                String imageUrl, String linkToFullPost) {
         mTitle = title;
-        mPubDate = pubDate;
         mDescription = description;
         mCategory = category;
-        mAuthor = author;
         mImageUrl = imageUrl;
         mLinkToFullPost = linkToFullPost;
         mUUID = UUID.randomUUID();
+        mPubDate = parseReceivedDate(pubDate);
     }
 
-    public String getAuthor() {
-        return mAuthor;
+    private Date parseReceivedDate(String pubDate) {
+        Date date;
+        DateFormat df = DateFormat.getDateInstance();
+        try {
+            date = df.parse(pubDate);
+        } catch (ParseException e) {
+            date = null;
+            e.printStackTrace();
+        }
+        return date;
     }
 
     public String getDescription() {
@@ -40,7 +53,7 @@ public class Feed {
         return mLinkToFullPost;
     }
 
-    public String getPubDate() {
+    public Date getPubDate() {
         return mPubDate;
     }
 
@@ -54,5 +67,11 @@ public class Feed {
 
     public UUID getUUID() {
         return mUUID;
+    }
+
+    public Bitmap getImage() {
+        Bitmap image = null;
+        mImage = image;
+        return mImage;
     }
 }

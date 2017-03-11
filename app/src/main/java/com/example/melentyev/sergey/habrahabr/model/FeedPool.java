@@ -12,9 +12,14 @@ public class FeedPool {
 
     private FeedPool(Context context) {
         mFeedList = new ArrayList<>();
+        for (int i = 0; i <= 20; i++) {
+            Feed feed = new Feed("Title " + i, "PubDate " + i, "Description " + i,
+                    "Category " + i, "Url", "Full Post");
+            mFeedList.add(feed);
+        }
     }
 
-    public static FeedPool getInstanse(Context context) {
+    public static FeedPool getInstance(Context context) {
         if (mFeedList == null)
             return sFeedPool = new FeedPool(context);
         return sFeedPool;
