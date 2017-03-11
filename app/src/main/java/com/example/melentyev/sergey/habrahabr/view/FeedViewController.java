@@ -1,5 +1,6 @@
 package com.example.melentyev.sergey.habrahabr.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -43,10 +44,18 @@ public class FeedViewController extends Fragment {
         mImage = (ImageView) view.findViewById(R.id.feed_view_image);
         mTitle = (TextView) view.findViewById(R.id.feed_view_title);
         mDescription = (TextView) view.findViewById(R.id.feed_view_description);
-        mShowBtn = (Button) view.findViewById(R.id.feed_view_show_btn);
 
         mTitle.setText(mFeed.getTitle());
         mDescription.setText(mFeed.getDescription());
+
+        mShowBtn = (Button) view.findViewById(R.id.feed_view_show_btn);
+        mShowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = HabraWebViewActivity.newIntent(getActivity(), mFeed.getUUID());
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

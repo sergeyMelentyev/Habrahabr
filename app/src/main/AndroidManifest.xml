@@ -21,6 +21,10 @@
             android:name=".view.FeedViewActivity">
         </activity>
 
+        <activity
+            android:name=".view.HabraWebViewActivity">
+        </activity>
+
     </application>
 
 </manifest>
