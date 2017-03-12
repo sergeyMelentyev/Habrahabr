@@ -64,8 +64,6 @@ public class Feed {
     }
 
     public Bitmap getImage() {
-        Bitmap image = null;
-        mImage = image;
         return mImage;
     }
     public void setImage(Bitmap image) {
@@ -77,20 +75,3 @@ public class Feed {
     }
 
 }
-
-/*
-
-    mPubDate = parseReceivedDate(pubDate);
-    private Date parseReceivedDate(String pubDate) {
-        Date date;
-        DateFormat df = DateFormat.getDateInstance();
-        try {
-            date = df.parse(pubDate);
-        } catch (ParseException e) {
-            date = null;
-            e.printStackTrace();
-        }
-        return date;
-    }
-
- */

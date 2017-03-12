@@ -86,7 +86,7 @@ public class RecyclerViewController extends Fragment {
 
         public void bindView(Feed feed) {
             mFeed = feed;
-            //mImage.setImageBitmap(mFeed.getImage());
+            mImage.setImageBitmap(mFeed.getImage());
             mTitle.setText(mFeed.getTitle());
         }
 

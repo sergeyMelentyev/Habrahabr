@@ -1,9 +1,17 @@
 package com.example.melentyev.sergey.habrahabr.model;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.InputStream;
 import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FeedParser {
 
@@ -42,7 +50,24 @@ public class FeedParser {
                                 case "link":
                                     feed.setLinkToFullPost(parser.getText());
                                 case "description":
-                                    feed.setDescription(parser.getText());
+                                    String rawDescription = parser.getText();
+
+                                    String finalDescription = rawDescription;
+                                    feed.setDescription(finalDescription);
+
+                                    Pattern pattern = Pattern.compile("<img src=\"(.*?)\"");
+                                    Matcher matcher = pattern.matcher(rawDescription);
+                                    if (matcher.find()) {
+                                        URL url = new URL(matcher.group(1));
+                                        System.out.println("+++++++++++++++++" + url);
+                                        HttpURLConnection http = (HttpURLConnection) url.openConnection();
+                                        InputStream in = http.getInputStream();
+                                        Bitmap image = BitmapFactory.decodeStream(in);
+                                        feed.setImage(image);
+                                        in.close();
+                                    }
+
+
                                     break;
                                 case "pubDate":
                                     feed.setPubDate(parser.getText());

@@ -22,13 +22,13 @@ public class FeedPool {
     public static List<Feed> getFeedList() {
         return mFeedList;
     }
+
     public static Feed getFeed(UUID uuid) {
         for (Feed feed : mFeedList)
             if (feed.getUUID().equals(uuid))
                 return feed;
         return null;
     }
-
     static void addFeed(Feed feed) {
         mFeedList.add(feed);
     }

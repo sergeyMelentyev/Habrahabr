@@ -45,6 +45,8 @@ public class FeedViewController extends Fragment {
         mTitle = (TextView) view.findViewById(R.id.feed_view_title);
         mDescription = (TextView) view.findViewById(R.id.feed_view_description);
 
+        mDate.setText(mFeed.getPubDate());
+        mImage.setImageBitmap(mFeed.getImage());
         mTitle.setText(mFeed.getTitle());
         mDescription.setText(mFeed.getDescription());
 
