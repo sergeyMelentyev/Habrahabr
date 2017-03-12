@@ -13,6 +13,7 @@ import java.util.List;
 
 public abstract class MainActivity extends AppCompatActivity implements GetRssFeeds.CallBackMethod {
 
+    private GetRssFeeds mGetRssFeeds;
     private static final String GET_RSS_FEEDS = "GET_RSS_FEEDS";
     private static final String HABRA_RSS_URL = "https://habrahabr.ru/rss/all/";
     private List<Feed> mFeedList;
@@ -25,7 +26,7 @@ public abstract class MainActivity extends AppCompatActivity implements GetRssFe
         setContentView(R.layout.activity_main);
 
         FragmentManager manager = getSupportFragmentManager();
-        GetRssFeeds mGetRssFeeds = (GetRssFeeds) manager.findFragmentByTag(GET_RSS_FEEDS);
+        mGetRssFeeds = (GetRssFeeds) manager.findFragmentByTag(GET_RSS_FEEDS);
         if (mGetRssFeeds == null) {
             mGetRssFeeds = new GetRssFeeds();
             manager.beginTransaction().add(mGetRssFeeds, GET_RSS_FEEDS).commit();
@@ -44,5 +45,7 @@ public abstract class MainActivity extends AppCompatActivity implements GetRssFe
     public void callBackMethod(String string) {
         System.out.println("!!!!!!!!!" + string);
     }
+
+
 
 }
