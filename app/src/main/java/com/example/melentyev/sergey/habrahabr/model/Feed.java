@@ -4,31 +4,83 @@ import android.graphics.Bitmap;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 public class Feed {
-    private String mTitle;  // cellView
-    private String mLinkToFullPost; // feedView
-    private String mDescription;    // feedView
-    private String mCategory;   // cellView
-    private Date mPubDate;
-    private String mImageUrl;   // cellView
-    private Bitmap mImage;  // cellView
-    private UUID mUUID; // data
+    private String mTitle;
+    private String mLinkToFullPost;
+    private String mDescription;
+    private String mCategory;
+    private String mPubDate;
+    private String mImageUrl;
+    private Bitmap mImage;
+    private UUID mUUID;
 
-    public Feed(String title, String pubDate, String description, String category,
-                String imageUrl, String linkToFullPost) {
-        mTitle = title;
-        mDescription = description;
-        mCategory = category;
-        mImageUrl = imageUrl;
-        mLinkToFullPost = linkToFullPost;
+    Feed() {
         mUUID = UUID.randomUUID();
-        mPubDate = parseReceivedDate(pubDate);
     }
 
+    public String getTitle() {
+        return mTitle;
+    }
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public String getLinkToFullPost() {
+        return mLinkToFullPost;
+    }
+    public void setLinkToFullPost(String linkToFullPost) {
+        mLinkToFullPost = linkToFullPost;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public String getCategory() {
+        return mCategory;
+    }
+    public void setCategory(String category) {
+        mCategory = category;
+    }
+
+    public String getPubDate() {
+        return mPubDate;
+    }
+    public void setPubDate(String pubDate) {
+        mPubDate = pubDate;
+    }
+
+    public String getImageUrl() {
+        return mImageUrl;
+    }
+    public void setImageUrl(String imageUrl) {
+        mImageUrl = imageUrl;
+    }
+
+    public Bitmap getImage() {
+        Bitmap image = null;
+        mImage = image;
+        return mImage;
+    }
+    public void setImage(Bitmap image) {
+        mImage = image;
+    }
+
+    public UUID getUUID() {
+        return mUUID;
+    }
+
+}
+
+/*
+
+    mPubDate = parseReceivedDate(pubDate);
     private Date parseReceivedDate(String pubDate) {
         Date date;
         DateFormat df = DateFormat.getDateInstance();
@@ -41,37 +93,4 @@ public class Feed {
         return date;
     }
 
-    public String getDescription() {
-        return mDescription;
-    }
-
-    public String getImageUrl() {
-        return mImageUrl;
-    }
-
-    public String getLinkToFullPost() {
-        return mLinkToFullPost;
-    }
-
-    public Date getPubDate() {
-        return mPubDate;
-    }
-
-    public String getTitle() {
-        return mTitle;
-    }
-
-    public String getCategory() {
-        return mCategory;
-    }
-
-    public UUID getUUID() {
-        return mUUID;
-    }
-
-    public Bitmap getImage() {
-        Bitmap image = null;
-        mImage = image;
-        return mImage;
-    }
-}
+ */

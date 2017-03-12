@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import java.io.IOException;
+
 public class GetRssFeeds extends Fragment {
 
     private CallBackMethod mCallBackMethod;
@@ -42,7 +44,12 @@ public class GetRssFeeds extends Fragment {
         }
         @Override
         protected String doInBackground(String... params) {
-            String result = params[0];
+            String result = null;
+            try {
+                result = new UrlFetcher().getUrlString(params[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return result;
         }
     }

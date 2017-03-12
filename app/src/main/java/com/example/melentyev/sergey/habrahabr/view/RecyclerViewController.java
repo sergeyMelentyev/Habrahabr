@@ -18,9 +18,9 @@ import com.example.melentyev.sergey.habrahabr.url.GetRssFeeds;
 
 import java.util.List;
 
-
 public class RecyclerViewController extends Fragment {
 
+    private RecyclerCellViewAdapter adapter;
     private List<Feed> mFeedList;
 
     public static Fragment getInstance() {
@@ -40,7 +40,7 @@ public class RecyclerViewController extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecyclerCellViewAdapter adapter = new RecyclerCellViewAdapter();
+        adapter = new RecyclerCellViewAdapter();
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -69,14 +69,12 @@ public class RecyclerViewController extends Fragment {
 
         private ImageView mImage;
         private TextView mTitle;
-        private TextView mCategory;
         private Feed mFeed;
 
         public RecyclerCellViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.recycler_cell, viewGroup, false));
             mImage = (ImageView) itemView.findViewById(R.id.recycler_view_image);
             mTitle = (TextView) itemView.findViewById(R.id.recycler_cell_title);
-            mCategory = (TextView) itemView.findViewById(R.id.recycler_cell_category);
             itemView.setOnClickListener(this);
         }
 
@@ -84,7 +82,6 @@ public class RecyclerViewController extends Fragment {
             mFeed = feed;
             //mImage.setImageBitmap(mFeed.getImage());
             mTitle.setText(mFeed.getTitle());
-            mCategory.setText(mFeed.getCategory());
         }
 
         @Override
