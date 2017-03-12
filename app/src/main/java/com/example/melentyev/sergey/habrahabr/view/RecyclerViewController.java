@@ -15,7 +15,6 @@ import com.example.melentyev.sergey.habrahabr.R;
 import com.example.melentyev.sergey.habrahabr.model.Feed;
 import com.example.melentyev.sergey.habrahabr.model.FeedPool;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
