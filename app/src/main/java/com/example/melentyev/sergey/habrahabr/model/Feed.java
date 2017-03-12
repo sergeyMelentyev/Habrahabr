@@ -2,9 +2,6 @@ package com.example.melentyev.sergey.habrahabr.model;
 
 import android.graphics.Bitmap;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.UUID;
 
 public class Feed {

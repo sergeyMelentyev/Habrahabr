@@ -1,7 +1,11 @@
 package com.example.melentyev.sergey.habrahabr.model;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.example.melentyev.sergey.habrahabr.R;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -13,9 +17,10 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class FeedParser {
 
-    public static void xmlParser(String str) {
+    public static void xmlParser(Resources resources, String str) {
         try {
             boolean inDataItemTag= false;
             String currentTagName = "";
@@ -55,19 +60,14 @@ public class FeedParser {
                                     String finalDescription = rawDescription;
                                     feed.setDescription(finalDescription);
 
-                                    Pattern pattern = Pattern.compile("<img src=\"(.*?)\"");
+                                    Pattern pattern = Pattern.compile("src=\"(.*?)\"");
                                     Matcher matcher = pattern.matcher(rawDescription);
-                                    if (matcher.find()) {
-                                        URL url = new URL(matcher.group(1));
-                                        System.out.println("+++++++++++++++++" + url);
-                                        HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                                        InputStream in = http.getInputStream();
-                                        Bitmap image = BitmapFactory.decodeStream(in);
-                                        feed.setImage(image);
-                                        in.close();
+                                    if (matcher.find())
+                                        feed.setImageUrl(matcher.group(1));
+                                    if (feed.getImageUrl() == null) {
+                                        Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.habrahabr);
+                                        feed.setImage(bitmap);
                                     }
-
-
                                     break;
                                 case "pubDate":
                                     feed.setPubDate(parser.getText());

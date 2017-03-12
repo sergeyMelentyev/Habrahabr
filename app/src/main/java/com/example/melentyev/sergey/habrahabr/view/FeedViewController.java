@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.melentyev.sergey.habrahabr.R;
 import com.example.melentyev.sergey.habrahabr.model.Feed;
 import com.example.melentyev.sergey.habrahabr.model.FeedPool;
+import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
@@ -46,7 +47,11 @@ public class FeedViewController extends Fragment {
         mDescription = (TextView) view.findViewById(R.id.feed_view_description);
 
         mDate.setText(mFeed.getPubDate());
-        mImage.setImageBitmap(mFeed.getImage());
+
+        Picasso.with(getActivity()).load(mFeed.getImageUrl()).into(mImage);
+        if (mFeed.getImageUrl() == null)
+            mImage.setImageBitmap(mFeed.getImage());
+
         mTitle.setText(mFeed.getTitle());
         mDescription.setText(mFeed.getDescription());
 

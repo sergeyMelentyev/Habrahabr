@@ -17,6 +17,7 @@ import com.example.melentyev.sergey.habrahabr.model.Feed;
 import com.example.melentyev.sergey.habrahabr.model.FeedParser;
 import com.example.melentyev.sergey.habrahabr.model.FeedPool;
 import com.example.melentyev.sergey.habrahabr.url.UrlFetcher;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
@@ -86,8 +87,11 @@ public class RecyclerViewController extends Fragment {
 
         public void bindView(Feed feed) {
             mFeed = feed;
-            mImage.setImageBitmap(mFeed.getImage());
             mTitle.setText(mFeed.getTitle());
+
+            Picasso.with(getActivity()).load(mFeed.getImageUrl()).into(mImage);
+            if (mFeed.getImageUrl() == null)
+                mImage.setImageBitmap(mFeed.getImage());
         }
 
         @Override
@@ -115,7 +119,7 @@ public class RecyclerViewController extends Fragment {
         protected Void doInBackground(String... params) {
             try {
                 String result = new UrlFetcher().getUrlString(params[0]);
-                FeedParser.xmlParser(result);
+                FeedParser.xmlParser(getResources(), result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
