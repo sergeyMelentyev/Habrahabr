@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.melentyev.sergey.habrahabr.model.FeedParser;
 import com.example.melentyev.sergey.habrahabr.model.FeedPool;
 import com.example.melentyev.sergey.habrahabr.url.GetRssFeeds;
 
@@ -32,9 +31,7 @@ public abstract class MainActivity extends AppCompatActivity implements GetRssFe
     }
 
     @Override
-    public void callBackMethod(String string) {
-        FeedParser.xmlParser(string);
-
+    public void callBackMethod() {
         FragmentManager manager = getSupportFragmentManager();
         Fragment recyclerFragment = manager.findFragmentById(R.id.activity_main_id);
         if (recyclerFragment == null) {

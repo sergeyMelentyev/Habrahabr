@@ -34,7 +34,7 @@ public class FeedParser {
                         currentTagName = "";
                         break;
                     case XmlPullParser.TEXT:
-                        if (inDataItemTag && feed != null) {
+                        if (inDataItemTag) {
                             switch (currentTagName) {
                                 case "title":
                                     feed.setTitle(parser.getText());

@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.example.melentyev.sergey.habrahabr.model.FeedParser;
+
 import java.io.IOException;
 
 public class GetRssFeeds extends Fragment {
@@ -16,7 +18,7 @@ public class GetRssFeeds extends Fragment {
     }
 
     public interface CallBackMethod {
-        void callBackMethod(String string);
+        void callBackMethod();
     }
 
     @Override
@@ -36,21 +38,21 @@ public class GetRssFeeds extends Fragment {
         request.execute(url);
     }
 
-    private class SendRequest extends AsyncTask<String, Void, String> {
+    private class SendRequest extends AsyncTask<String, Void, Void> {
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            mCallBackMethod.callBackMethod(s);
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mCallBackMethod.callBackMethod();
         }
         @Override
-        protected String doInBackground(String... params) {
-            String result = null;
+        protected Void doInBackground(String... params) {
             try {
-                result = new UrlFetcher().getUrlString(params[0]);
+                String result = new UrlFetcher().getUrlString(params[0]);
+                FeedParser.xmlParser(result);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return result;
+            return null;
         }
     }
 }
