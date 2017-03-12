@@ -22,7 +22,6 @@ public class GetRssFeeds extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -36,13 +35,11 @@ public class GetRssFeeds extends Fragment {
     }
 
     private class SendRequest extends AsyncTask<String, Void, String> {
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             mCallBackMethod.callBackMethod(s);
         }
-
         @Override
         protected String doInBackground(String... params) {
             String result = params[0];

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.melentyev.sergey.habrahabr.R;
 import com.example.melentyev.sergey.habrahabr.model.Feed;
 import com.example.melentyev.sergey.habrahabr.model.FeedPool;
+import com.example.melentyev.sergey.habrahabr.url.GetRssFeeds;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class RecyclerViewController extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFeedList = FeedPool.getInstance(getActivity()).getFeedList();
+        mFeedList = FeedPool.getFeedList();
     }
 
     @Override
