@@ -1,6 +1,7 @@
 package com.example.melentyev.sergey.habrahabr.view;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,13 +14,16 @@ import android.widget.TextView;
 
 import com.example.melentyev.sergey.habrahabr.R;
 import com.example.melentyev.sergey.habrahabr.model.Feed;
+import com.example.melentyev.sergey.habrahabr.model.FeedParser;
 import com.example.melentyev.sergey.habrahabr.model.FeedPool;
-import com.example.melentyev.sergey.habrahabr.url.GetRssFeeds;
+import com.example.melentyev.sergey.habrahabr.url.UrlFetcher;
 
+import java.io.IOException;
 import java.util.List;
 
 public class RecyclerViewController extends Fragment {
 
+    private static final String HABRA_RSS_URL = "https://habrahabr.ru/rss/all/";
     private RecyclerCellViewAdapter adapter;
     private List<Feed> mFeedList;
 
@@ -30,7 +34,7 @@ public class RecyclerViewController extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFeedList = FeedPool.getFeedList();
+        taskToExecute(HABRA_RSS_URL);
     }
 
     @Override
@@ -61,7 +65,9 @@ public class RecyclerViewController extends Fragment {
 
         @Override
         public int getItemCount() {
-            return mFeedList.size();
+            if (mFeedList != null)
+                return mFeedList.size();
+            return 0;
         }
     }
 
@@ -88,6 +94,32 @@ public class RecyclerViewController extends Fragment {
         public void onClick(View v) {
             Intent intent = FeedViewActivity.newIntent(getActivity(), mFeed.getUUID());
             startActivity(intent);
+        }
+    }
+
+    private void taskToExecute(String url) {
+        SendRequest request = new SendRequest();
+        request.execute(url);
+    }
+    private void upgradeUI(){
+        adapter.notifyDataSetChanged();
+    }
+    private class SendRequest extends AsyncTask<String, Void, Void> {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mFeedList = FeedPool.getFeedList();
+            upgradeUI();
+        }
+        @Override
+        protected Void doInBackground(String... params) {
+            try {
+                String result = new UrlFetcher().getUrlString(params[0]);
+                FeedParser.xmlParser(result);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }
